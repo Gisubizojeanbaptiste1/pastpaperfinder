@@ -32,14 +32,14 @@
     <h2>Upload Past Papers</h2>
 
     <label for="term">Term (Academic Year Term):</label>
-    <select name="academicyearterms" id="adacemicyear" class="terms" required>
+    <select name="academicyearterms" id="adacemicyear" class="select_option" required>
         <option value="Term 1">Term 1</option>
         <option value="Term 2">Term 2</option>
         <option value="Term 3">Term 3</option>
     </select>
 
     <label for="W">Weeks</label>
-    <select name="Academicweeks" id="studyingweeks" class="weeks">
+    <select name="Academicweeks" id="studyingweeks" class="select_option">
       <option value="Week 1">Week 1</option>
       <option value="Week 2">Week 2</option>
       <option value="Week 3">Week 3</option>
@@ -58,7 +58,7 @@
       <option value="Week 17">Week 17</option>
     </select>
     <label for="subject">Subject:</label>
-    <input type="text" id="subject" name="subject" required>
+    <input type="text" id="subject" name="subject" placeholder="Enter Your Name" required>
 
     <label for="classselection">Class:</label>
     <select name="classselection" id="classselection" class="select_option" onchange="checkClassSelection()">
@@ -87,7 +87,7 @@
         <input type="text" id="otherClass" name="otherClass" placeholder="Enter your class">
     </div>
     <label for="category">Category:</label>
-    <select name="optionsofcategory" id="category" class="subject_selection" onchange="checkCategory()">
+    <select name="optionsofcategory" id="category" class="select_option" onchange="checkCategory()">
         <option value="test">Test</option>
         <option value="quiz">Quiz</option>
         <option value="weeklystandardexam">Weekly Standard Exam</option>
@@ -98,7 +98,7 @@
     </select>
     
     <!-- Category Input for 'Other' -->
-    <div id="categoryOtherInput" style="display:none;">
+    <div id="categoryOtherInput" style="display:none; font-family: 'Poppins', sans-serif;">
         <label for="otherCategory">Specify Category:</label>
         <input type="text" id="otherCategory" name="otherCategory" placeholder="Enter category">
     </div>

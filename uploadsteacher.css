@@ -1,47 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 /* style-teacher.css */
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .teacher-dashboard {
   display: flex;
   min-height: 100vh;
 }
-
+/* The start of the sidebar */
 .sidebar {
   width: 250px;
   background: #2c3e50;
   color: #ecf0f1;
   padding: 20px;
+  /* height: 100%; */
 }
 
 .sidebar h2 {
-  font-size: 22px;
+  font-size: 30px;
   margin-bottom: 20px;
 }
 
+a .fa {
+  font-size: 20px;
+  font-weight: 900;
+}
+
 .sidebar nav a {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   color: #ecf0f1;
-  padding: 10px 0;
+  padding: 10px 7px;
   text-decoration: none;
   margin-bottom: 10px;
   transition: background 0.3s;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
 }
 
 .sidebar nav a:hover, .sidebar nav a.active {
   background: #34495e;
 }
 
+/* The end of sidebar tab */
 main {
   flex: 1;
   padding: 20px;
 }
 
-.welcome h1 {
-  font-size: 28px;
+main h2 {
+  font-size: 30px;
   margin-bottom: 10px;
+  color: #3498db;
 }
 
 section {
@@ -63,6 +76,8 @@ section {
 
 .upload label, .communicate textarea {
   margin: 10px 0 5px;
+  font-size: 16px;
+  font-weight: 500;
 }
 /* input[type="select"]{
 
@@ -73,30 +88,35 @@ section {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.select_option{
-  height: 2rem;
-  padding-left: 0.20rem;
+.select_option {
+  width: 350px;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  color: #333;
+  font-family: "Poppins", sans-serif;
 }
-.terms{
-  height: 2rem;
-  padding-left: 0.20rem;
-}
-.weeks{
-  height: 2rem;
-  padding-left: 0.20rem;
-}
+
 .subject_selection{
   height: 2rem;
   padding-left: 0.20rem;
 }
 .upload button {
-  background-color: #2ecc71;
+  background-color: #34495e;
   color: #fff;
   border: none;
   cursor: pointer;
   font-size: 16px;
+  font-family: 'Poppins', sans-serif;
 }
 
 .upload button:hover {
-  background-color: #27ae60;
+  background-color: #3498db;
+  font-family: 'Poppins', sans-serif;
 }
