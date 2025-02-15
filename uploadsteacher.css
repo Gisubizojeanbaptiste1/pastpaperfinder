@@ -1,0 +1,102 @@
+/* style-teacher.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.teacher-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 250px;
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.sidebar nav a {
+  display: block;
+  color: #ecf0f1;
+  padding: 10px 0;
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: background 0.3s;
+}
+
+.sidebar nav a:hover, .sidebar nav a.active {
+  background: #34495e;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.welcome h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+.upload{
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid; */
+    /* max-width: 500px; */
+}
+.upload form{
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-content: center; */
+}
+
+.upload label, .communicate textarea {
+  margin: 10px 0 5px;
+}
+/* input[type="select"]{
+
+} */
+.upload input, .communicate textarea, .upload button {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.select_option{
+  height: 2rem;
+  padding-left: 0.20rem;
+}
+.terms{
+  height: 2rem;
+  padding-left: 0.20rem;
+}
+.weeks{
+  height: 2rem;
+  padding-left: 0.20rem;
+}
+.subject_selection{
+  height: 2rem;
+  padding-left: 0.20rem;
+}
+.upload button {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload button:hover {
+  background-color: #27ae60;
+}
