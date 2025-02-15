@@ -90,23 +90,6 @@ $userId = $_SESSION['id'];
         style="width:19rem;height:2rem;padding-left:1rem;" class="searching_colors">
         </section>
 
-        <!-- Papers Section -->
-        <section class="papers">
-          <h2>Available Papers</h2>
-          <!-- <div class="paper-list">
-            <div class="paper-card">
-              <h3>Mathematics (2023)</h3>
-              <p>Grade 12</p>
-              <a href="download.php?id=1" class="btn">Download</a>
-              <button class="btn-fav" onclick="addToFavorites(1)">
-                Add to Favorites
-              </button>
-            </div>
-            
-          </div> -->
-        </section>
-
-        <!-- Favorites Section -->
         <?php
 include "connection.php";
 
@@ -134,7 +117,6 @@ $papersResult = mysqli_query($conn, $papersQuery);
 <table id="papersTable">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Subject</th>
             <th>Class</th>
             <th>Year</th>
@@ -152,7 +134,6 @@ $papersResult = mysqli_query($conn, $papersQuery);
                 $coverPath = str_replace('C:/xampp/htdocs', '', $row['cover_page']);
                 $isFavorite = $row['is_favorite'] > 0;
                 echo "<tr>
-                        <td>{$row['id']}</td>
                         <td>" . htmlspecialchars($row['subject']) . "</td>
                         <td>" . htmlspecialchars($row['class_selection']) . "</td>
                         <td>{$row['year']}</td>
