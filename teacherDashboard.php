@@ -46,7 +46,7 @@ if (!isset($_SESSION['id'])) {
     <main>
       <!-- Welcome Section -->
       <section class="welcome">
-        <h1>Welcome, Teacher</h1>
+        <h1>Welcome, <span>Teacher</span></h1>
         <p>Manage your past papers and interact with students.</p>
       </section>
       <!-- Analytics -->
@@ -56,11 +56,11 @@ if (!isset($_SESSION['id'])) {
           <div class="stat-card">
             <h3>Most Searched Subjects</h3>
             <p>Mathematics</p>
-            <p>on January,08 , 2025 </p>
+            <p>On January,08 , 2025</p>
           </div>
           <div class="stat-card">
             <h3>Top downloaded subject</h3>
-            <p>total download 102</p>
+            <p>Total download 102</p>
             <p>Today</p>
           </div>
         </div>
@@ -68,120 +68,113 @@ if (!isset($_SESSION['id'])) {
 
       <!-- Manage Past Papers -->
       <section id="manage" class="manage">
-      <h2>Manage Past Papers</h2>
+        <h2>Manage Past Papers</h2>
 
-<!-- Filter Inputs -->
-<input type="text" id="searchInput" placeholder="Type here to search instantly" onkeyup="searchTable()" 
-    style="width:19rem;height:2rem;padding-left:1rem;" class="searching_colors">
+        <!-- Filter Inputs -->
+        <input type="text" id="searchInput" placeholder="Type here to search instantly" onkeyup="searchTable()" 
+          style="width:19rem;height:2rem;padding-left:1rem;" class="search-input"> <br>
 
-<label for="">Filter content</label>
-<select name="subject" id="subjectFilter">
-    <option value="">Filter content based on subjects</option>
-    <option value="chemistry">Chemistry</option>
-    <option value="Biology">Biology</option>
-    <option value="Physics">Physics</option>
-    <option value="generalpaper">General paper</option>
-    <option value="english">English</option>
-    <option value="kinyearwanda">Kinyarwanda</option>
-    <option value="entrepreneurship">Entrepreneurship</option>
-    <option value="computerscience">Computer Science</option>
-    <option value="java">Java</option>
-    <option value="math">Math</option>
-    <option value="economics">Economics</option>
-    <option value="networking">Networking</option>
-    <option value="database">Database</option>
-    <option value="history">History</option>
-    <option value="geography">Geography</option>
-    <option value="literature">Literature</option>
-</select>
+        <label for="">Filter Content Based On: </label>
+        <select name="subject" id="subjectFilter" class="select_option">
+            <option value="">Subjects</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="Biology">Biology</option>
+            <option value="Physics">Physics</option>
+            <option value="generalpaper">General paper</option>
+            <option value="english">English</option>
+            <option value="kinyearwanda">Kinyarwanda</option>
+            <option value="entrepreneurship">Entrepreneurship</option>
+            <option value="computerscience">Computer Science</option>
+            <option value="java">Java</option>
+            <option value="math">Math</option>
+            <option value="economics">Economics</option>
+            <option value="networking">Networking</option>
+            <option value="database">Database</option>
+            <option value="history">History</option>
+            <option value="geography">Geography</option>
+            <option value="literature">Literature</option>
+        </select> 
 
-<select name="class" id="classFilter">
-    <option value="">Filter according to class</option>
-    <?php 
-    include('connection.php');
-    $q = "SELECT * FROM class"; 
-    $s = mysqli_query($conn, $q); 
-    while ($r = mysqli_fetch_assoc($s)) { 
-        echo "<option value='{$r['id']}'>{$r['classname']}</option>"; 
-    } 
-    ?>
-</select>
+        <select name="class" id="classFilter" class="select_option">
+            <option value="">Class</option>
+            <?php 
+            include('connection.php');
+            $q = "SELECT * FROM class"; 
+            $s = mysqli_query($conn, $q); 
+            while ($r = mysqli_fetch_assoc($s)) { 
+                echo "<option value='{$r['id']}'>{$r['classname']}</option>"; 
+            } 
+            ?>
+        </select>
 
-<select name="category" id="categoryFilter">
-    <option value="nationalexamination">National Exam</option>
-    <option value="exam">Exam</option>
-    <option value="mock">Mock</option>
-    <option value="weeklyexam">Weekly Exam</option>
-    <option value="test">Test</option>
-    <option value="quiz">Quiz</option>
-</select>
+        <select name="category" id="categoryFilter" class="select_option">
+            <option value="nationalexamination">Paper Type</option>
+            <option value="exam">Exam</option>
+            <option value="mock">Mock</option>
+            <option value="weeklyexam">Weekly Exam</option>
+            <option value="test">Test</option>
+            <option value="quiz">Quiz</option>
+        </select>
 
-<input type="date" id="dateFilter">
-
-          <!-- <button onclick="applyFilters()">Apply filter</button> -->
-        
+        <input type="date" id="dateFilter" class="select">
+     <!-- <button onclick="applyFilters()">Apply filter</button>           -->
       </section>
-      <!-- Manage Past Papers -->
-      <section id="manage" class="manage">
-       
+              <!-- Manage Past Papers -->
+  <section id="manage" class="manage">
       <table id="papersTable">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Term</th>
-      <th>Week</th>
-      <th>Subject</th>
-      <th>Class</th>
-      <th>Year</th>
-      <th>Category</th>
-      <th>Cover Page</th>
-      <th>Teacher Name</th>
-      <th>Qns</th>
-      <th>Ans</th>
-      <th>Download</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    include 'connection.php';
-    $sql = "SELECT * FROM past_papers";
-    $result = mysqli_query($conn, $sql);
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Term</th>
+            <th>Week</th>
+            <th>Subject</th>
+            <th>Class</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Teacher Name</th>
+            <th>Qns</th>
+            <th>Ans</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          include 'connection.php';
+          $sql = "SELECT * FROM past_papers";
+          $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $coverPath = str_replace('C:/xampp/htdocs', '', $row['cover_page']);
-            $filePath = str_replace('C:/xampp/htdocs', '', $row['file_path']);
-            $answerPath = str_replace('C:/xampp/htdocs', '', $row['answers']);
+          if (mysqli_num_rows($result) > 0) {
+              while ($row = mysqli_fetch_assoc($result)) {
+                  $coverPath = str_replace('C:/xampp/htdocs', '', $row['cover_page']);
+                  $filePath = str_replace('C:/xampp/htdocs', '', $row['file_path']);
+                  $answerPath = str_replace('C:/xampp/htdocs', '', $row['answers']);
 
-            echo "<tr>
-                    <td>{$row['id']}</td>
-                    <td>{$row['Term']}</td>
-                    <td>{$row['weeks']}</td>
-                    <td>{$row['subject']}</td>
-                    <td>{$row['class_selection']}</td>
-                    <td>{$row['year']}</td>
-                    <td>{$row['category']}</td>
-                    <td><img src='{$coverPath}' alt='Cover' width='50'></td>
-                    <td>{$row['uploaded_by']}</td>
-                    <td><a href='{$filePath}' target='_blank'>Qns</a></td>
-                    <td><a href='{$answerPath}' target='_blank'>Ans</a></td>
-                    <td><a href='teacherdownload.php?id={$row['file_path']}'>Download</a></td>
-                    <td>
-                        <a href='#' class='edit-btn' data-id='{$row['id']}' data-subject='{$row['subject']}' data-class='{$row['class_selection']}' data-year='{$row['year']}' data-category='{$row['category']}' data-uploaded_by='{$row['uploaded_by']}' data-cover_path='{$coverPath}' data-file_path='{$filePath}'>Edit</a> |
-                        <a href='delete_paper.php?id={$row['id']}' onclick='return confirm(\"Are you sure?\")'>Delete</a>
-                    </td>
-                  </tr>";
-        }
-    } else {
-        echo "<tr><td colspan='13'>No past papers found.</td></tr>";
-    }
-    ?>
-  </tbody>
-</table>
- 
-
-      </section>
+                  echo "<tr>
+                          <td>{$row['id']}</td>
+                          <td>{$row['Term']}</td>
+                          <td>{$row['weeks']}</td>
+                          <td>{$row['subject']}</td>
+                          <td>{$row['class_selection']}</td>
+                          <td>{$row['year']}</td>
+                          <td>{$row['category']}</td>
+                          
+                          <td>{$row['uploaded_by']}</td>
+                          <td><a href='{$filePath}' target='_blank'>Qns</a></td>
+                          <td><a href='{$answerPath}' target='_blank'>Ans</a></td>
+                          
+                          <td>
+                              <a href='#' class='edit-btn' data-id='{$row['id']}' data-subject='{$row['subject']}' data-class='{$row['class_selection']}' data-year='{$row['year']}' data-category='{$row['category']}' data-uploaded_by='{$row['uploaded_by']}' data-cover_path='{$coverPath}' data-file_path='{$filePath}'>Edit</a> |
+                              <a href='delete_paper.php?id={$row['id']}' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                          </td>
+                        </tr>";
+              }
+          } else {
+              echo "<tr><td colspan='13'>No past papers found.</td></tr>";
+          }
+          ?>
+        </tbody>
+      </table>
+  </section>
 
     </main>
     <div id="editModal" style="display:none;">
