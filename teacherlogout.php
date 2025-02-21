@@ -2,6 +2,6 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: teacherDashboard.php");
+header("Location: loginteacher.php");
 exit();
 ?>

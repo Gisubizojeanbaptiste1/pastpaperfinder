@@ -36,8 +36,9 @@ if (!isset($_SESSION['id'])) {
         <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
         <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
-        <a href="#analytics"><i class="fa fa-chart-line"></i> Analytics</a>
-        <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a>
+        <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
+        <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
+        <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
         <a href="teacherlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </nav>
     </aside>
@@ -59,8 +60,8 @@ if (!isset($_SESSION['id'])) {
             <p>On January,08 , 2025</p>
           </div>
           <div class="stat-card">
-            <h3>Top downloaded subject</h3>
-            <p>Total download 102</p>
+            <h3>Most Viewed subject</h3>
+            <p>Total viewed subject</p>
             <p>Today</p>
           </div>
         </div>
