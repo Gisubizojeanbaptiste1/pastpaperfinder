@@ -100,14 +100,14 @@ $papersResult = mysqli_query($conn, $papersQuery);
 <table id="papersTable">
     <thead>
         <tr>
-            <th>ID</th>
+            <!-- <th>ID</th> -->
             <th>Term</th>
             <th>Week</th>
             <th>Subject</th>
             <th>Class</th>
             <th>Year</th>
             <th>Category</th>
-            <th>Cover Page</th>
+            <!-- <th>Cover Page</th> -->
             <th>Teacher Name</th>
             <th>Qns</th>
             <th>Ans</th>
@@ -124,14 +124,14 @@ $papersResult = mysqli_query($conn, $papersQuery);
                 $answerPath = str_replace('C:/xampp/htdocs', '', $row['answers']);
                 $isFavorite = $row['is_favorite'] > 0;
                 echo "<tr>
-                        <td>{$row['id']}</td>
+                        
                         <td>{$row['Term']}</td>
                         <td>{$row['weeks']}</td>
                         <td>" . htmlspecialchars($row['subject']) . "</td>
                         <td>" . htmlspecialchars($row['class_selection']) . "</td>
                         <td>{$row['year']}</td>
                         <td>" . htmlspecialchars($row['category']) . "</td>
-                        <td><img src='{$coverPath}' alt='Cover' width='50'></td>
+                        
                         <td>" . htmlspecialchars($row['uploaded_by']) . "</td>
                         <td><a href='{$filePath}' target='_blank'>Qns</a></td>
                         <td><a href='{$answerPath}' target='_blank'>Ans</a></td>
