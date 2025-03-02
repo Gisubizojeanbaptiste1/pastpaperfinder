@@ -38,8 +38,8 @@ $userId = $_SESSION['id'];
       <aside class="sidebar">
         <h2>Past Paper Finder</h2>
         <nav>
-          <a href="studentDashboard.php"><i class="fa fa-home"></i> Dashboard</a>
-          <a href="studentfavorite.php" class="active"><i class="fa fa-heart"></i> Favorites</a>
+          <a href="studentDashboard.php" class="active"><i class="fa fa-home"></i> Dashboard</a>
+          <a href="studentfavorite.php"><i class="fa fa-heart"></i> Favorites</a>
           <a href="studentRequestpastpaper.php"><i class="fa fa-envelope"></i> Request Papers</a>
           <a href="studentlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
           <a href="studentsettings.php"><i class="fa fa-cogs" ></i> Settings</a>
@@ -47,7 +47,7 @@ $userId = $_SESSION['id'];
         </nav>
       </aside>
 
-      <!-- Main Content -->
+      <!-- Main Content -->      
       <main>
         <!-- Search Bar -->
         <section class="search-bar">
