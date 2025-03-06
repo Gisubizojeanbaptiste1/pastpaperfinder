@@ -15,6 +15,14 @@ if (!isset($_SESSION['id'])) {
     header('location:loginteacher.php');
     exit();
 }
+
+
+if (isset($_GET['success'])) {
+  echo "<p style='color:green;'>{$_GET['success']}</p>";
+}
+if (isset($_GET['error'])) {
+  echo "<p style='color:red;'>{$_GET['error']}</p>";
+}
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +31,7 @@ if (!isset($_SESSION['id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Dashboard | Past Paper Finder</title>
-  <link rel="stylesheet" href="communicate.css">
+  <link rel="stylesheet" href="StudentRequest.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -32,11 +40,12 @@ if (!isset($_SESSION['id'])) {
     <aside class="sidebar">
       <h2>Past Paper Finder</h2>
       <nav>
-        <a href="teacherDashboard.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
         <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
         <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
-        <a href="StudentRequest.php" class="active"><i class="fa fa-comments"></i> Student Requests</a>
+        <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
+        <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
         <a href="teacherlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </nav>
     </aside>
@@ -45,26 +54,27 @@ if (!isset($_SESSION['id'])) {
     <main>
       <!-- Upload Past Papers -->
       <section id="requests" class="request">
-      <table id="papersTable">
+    <table id="papersTable">
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>Subject</th>
-            <th>otherSubject</th>
-            <th>grade</th>
-            <th>date</th>
-            <th>category</th>
-            <th>otherCategory</th>
-            <th>className</th>
-            <th>details</th>
-            <th>Submited_at</th>
-            <th>Actions</th>
-          </tr>
+            <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Other Subject</th>
+                <th>Grade</th>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Other Category</th>
+                <th>Class Name</th>
+                <th>Details</th>
+                <th>Submitted At</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
-        <?php
+            <?php
             include 'connection.php';
-            //this query is used to join two tables requests and class to get the class name
+
             $sql = "
                 SELECT 
                     r.id, 
@@ -77,6 +87,7 @@ if (!isset($_SESSION['id'])) {
                     r.class_id, 
                     r.details, 
                     r.created_at, 
+                    r.solved, 
                     c.classname
                 FROM requests r
                 LEFT JOIN class c ON r.class_id = c.id
@@ -93,22 +104,31 @@ if (!isset($_SESSION['id'])) {
                             <td>{$row['date']}</td>
                             <td>{$row['category']}</td>
                             <td>{$row['otherCategory']}</td>
-                            <td>{$row['classname']}</td> <!-- This is the class name fetched from the class table -->
+                            <td>{$row['classname']}</td>
                             <td>{$row['details']}</td>
                             <td>{$row['created_at']}</td>
-                            <td>
-                                <a href='#'>Solved</a> |
+                            <td class='" . ($row['solved'] == 'Yes' ? 'status-solved' : 'status-pending') . "'>
+                                " . ($row['solved'] == 'Yes' ? '✅ Solved' : '❌ Pending') . "
                             </td>
-                          </tr>";
+                            <td>";
+
+                    if ($row['solved'] == 'No') {
+                        echo "<a href='mark_solved.php?id={$row['id']}'>Mark as Solved</a>";
+                    } else {
+                        echo "Already Solved";
+                    }
+
+                    echo "</td></tr>";
                 }
             } else {
-                echo "<tr><td colspan='13'>No request has been found. Please refresh or try again.</td></tr>";
+                echo "<tr><td colspan='12'>No request has been found. Please refresh or try again.</td></tr>";
             }
             ?>
         </tbody>
-      </table>
+    </table>
+</section>
 
-      </section>
+
     </main>
   </div>
 
