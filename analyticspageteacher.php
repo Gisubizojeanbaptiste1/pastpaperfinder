@@ -1,22 +1,3 @@
-<?php
-// session_start();
-// include 'connection.php';
-
-// if (!isset($_SESSION['user_id'])) {
-//     die("User not logged in!");
-// }
-include('connection.php');
-
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['id'])) {
-    header('location:loginteacher.php');
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +7,7 @@ if (!isset($_SESSION['id'])) {
   <link rel="stylesheet" href="analyticspageforteacher.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Added Chart.js CDN -->
 </head>
 <body>
   <div class="teacher-dashboard">
@@ -33,10 +15,11 @@ if (!isset($_SESSION['id'])) {
     <aside class="sidebar">
       <h2>Past Paper Finder</h2>
       <nav>
-        <a href="teacherDashboard.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
         <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
-        <a href="analyticspageteacher.php"  class="active"><i class="fa fa-chart-line"></i> Analytics</a>
+        <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
+        <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
         <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
         <a href="teacherlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </nav>
@@ -45,139 +28,144 @@ if (!isset($_SESSION['id'])) {
     <!-- Main Content -->
     <main>
     <section>
-      <div class="chart-container" id="bar_chart"></div>
-      <div class="chart-container" id="pie_chart"></div>
-      <div class="chart-container" id="line_chart"></div>
-      <div class="chart-container" id="area_chart"></div>
-      <div class="chart-container" id="scatter_chart"></div>
+      <canvas class="chart-container" id="bar_chart"></canvas>
+      <canvas class="chart-container" id="pie_chart"></canvas>
+      <canvas class="chart-container" id="line_chart"></canvas>
+      <canvas class="chart-container" id="area_chart"></canvas>
+      <canvas class="chart-container" id="scatter_chart"></canvas>
     </section>
   </main>
 
   </div>
 
   <script>
-    // Function to show the input for 'Other' class
-    function checkClassSelection() {
-        var classSelection = document.getElementById("classselection").value;
-        var classOtherInput = document.getElementById("classOtherInput");
-
-        if (classSelection === "other") {
-            classOtherInput.style.display = "block";
-        } else {
-            classOtherInput.style.display = "none";
+    // Bar Chart (3D effect simulation using chart.js)
+    new Chart(document.getElementById("bar_chart"), {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '3D Bar Chart Example',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)',
+                    'rgba(255, 159, 64, 0.7)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            // Simulate 3D effect
+            rotation: {
+                x: 15,
+                y: 15
+            }
         }
-    }
-
-    // Function to show the input for 'Other' category
-    function checkCategory() {
-        var categorySelection = document.getElementById("category").value;
-        var categoryOtherInput = document.getElementById("categoryOtherInput");
-
-        if (categorySelection === "other") {
-            categoryOtherInput.style.display = "block";
-        } else {
-            categoryOtherInput.style.display = "none"; 
-        }
-    }
-</script>
-<script type="text/javascript">
-    // Load the Google Charts library
-    google.charts.load('current', {
-      packages: ['corechart', 'bar', 'pie', 'line', 'area', 'scatter']
     });
 
-    google.charts.setOnLoadCallback(drawCharts);
+    // Pie Chart (No 3D effect)
+    new Chart(document.getElementById("pie_chart"), {
+        type: 'pie',
+        data: {
+            labels: ['Red', 'Blue', 'Yellow'],
+            datasets: [{
+                label: 'Pie Chart Example',
+                data: [300, 50, 100],
+                backgroundColor: ['red', 'blue', 'yellow']
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
 
-    // Function to draw the charts
-    function drawCharts() {
-      // Bar Chart
-      var barData = google.visualization.arrayToDataTable([
-        ['Category', 'Quantity'],
-        ['Drugs', 200],
-        ['Books', 150],
-        ['Supplies', 100],
-        ['Equipments', 50]
-      ]);
-      var barOptions = {
-        title: 'Category Quantities',
-        chartArea: { width: '50%' },
-        hAxis: { title: 'Quantity', minValue: 0 },
-        vAxis: { title: 'Category' }
-      };
-      var barChart = new google.visualization.BarChart(document.getElementById('bar_chart'));
-      barChart.draw(barData, barOptions);
+    // Line Chart (No 3D effect)
+    new Chart(document.getElementById("line_chart"), {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Line Chart Example',
+                data: [65, 59, 80, 81, 56, 55],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
 
-      // Pie Chart
-      var pieData = google.visualization.arrayToDataTable([
-        ['Category', 'Percentage'],
-        ['Electronics', 45],
-        ['Clothing', 30],
-        ['Home Appliances', 15],
-        ['Books', 10]
-      ]);
-      var pieOptions = {
-        title: 'Product Categories Distribution',
-        is3D: true
-      };
-      var pieChart = new google.visualization.PieChart(document.getElementById('pie_chart'));
-      pieChart.draw(pieData, pieOptions);
+    // Area Chart (No 3D effect)
+    new Chart(document.getElementById("area_chart"), {
+        type: 'line',
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Area Chart Example',
+                data: [65, 59, 80, 81, 56, 55],
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {
+            responsive: true
+        }
+    });
 
-      // Line Chart
-      var lineData = new google.visualization.DataTable();
-      lineData.addColumn('number', 'Month');
-      lineData.addColumn('number', 'Sales');
-      lineData.addRows([
-        [1, 100],
-        [2, 120],
-        [3, 140],
-        [4, 160],
-        [5, 180],
-        [6, 200]
-      ]);
-      var lineOptions = {
-        title: 'Sales Trends',
-        curveType: 'function',
-        legend: { position: 'bottom' }
-      };
-      var lineChart = new google.visualization.LineChart(document.getElementById('line_chart'));
-      lineChart.draw(lineData, lineOptions);
-
-      // Area Chart
-      var areaData = google.visualization.arrayToDataTable([
-        ['Month', 'Product A', 'Product B'],
-        ['January', 30, 40],
-        ['February', 40, 50],
-        ['March', 50, 60],
-        ['April', 60, 70],
-        ['May', 70, 80]
-      ]);
-      var areaOptions = {
-        title: 'Product Sales Comparison',
-        isStacked: true
-      };
-      var areaChart = new google.visualization.AreaChart(document.getElementById('area_chart'));
-      areaChart.draw(areaData, areaOptions);
-
-      // Scatter Chart
-      var scatterData = new google.visualization.DataTable();
-      scatterData.addColumn('number', 'X');
-      scatterData.addColumn('number', 'Y');
-      scatterData.addRows([
-        [1, 2],
-        [2, 4],
-        [3, 6],
-        [4, 8],
-        [5, 10]
-      ]);
-      var scatterOptions = {
-        title: 'Data Correlation',
-        hAxis: { title: 'X Value' },
-        vAxis: { title: 'Y Value' },
-        legend: 'none'
-      };
-      var scatterChart = new google.visualization.ScatterChart(document.getElementById('scatter_chart'));
-      scatterChart.draw(scatterData, scatterOptions);
-    }
+    // Scatter Chart (Simulating 3D effect using rotation)
+    new Chart(document.getElementById("scatter_chart"), {
+        type: 'scatter',
+        data: {
+            datasets: [{
+                label: '3D Scatter Chart Example',
+                data: [{
+                    x: 10,
+                    y: 20
+                }, {
+                    x: 15,
+                    y: 35
+                }, {
+                    x: 25,
+                    y: 45
+                }, {
+                    x: 40,
+                    y: 60
+                }],
+                backgroundColor: 'rgb(75, 192, 192)',
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            // 3D-like rotation effect
+            rotation: {
+                x: 45,
+                y: 45
+            }
+        }
+    });
   </script>
 </body>
 </html>
