@@ -3,57 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard with PDF Upload</title>
+    <title>Past Paper Finder</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="sidebar">
-        <h2>PPFinder</h2>
-        <ul>
-            <li>Dashboard</li>
-            <li>Statistics</li>
-            <li>Projects</li>
-            <li>Upload PDF</li>
-            <li>studentDashboard</li><a href="studentDashboard.html">studentDashboard</a>
-            <li>adminDashboard</li><a href="adminDashboard.html">adminDashboard</a>
-            <li>adminDashboard</li><a href="teacherDashboard.html">teacherDashboard</a>
+<header>
+    <nav class="navbar">
+        <div class="logo">Past Paper Finder</div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li class="dropdown">
+                <button class="login-btn">Login</button>
+                <div class="dropdown-content">
+                    <a href="login-teacher.html">Login as Teacher</a>
+                    <a href="login-student.html">Login as Student</a>
+                </div>
+            </li>
         </ul>
-    </div>
+    </nav>
+</header>
 
-    <div class="content">
-        <header>
-            <h1>Admin Dashboard</h1>
-            <div class="user-info">
-                <span>Welcome, Admin</span>
+
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="hero-content">
+                <h2>Find Past Papers with Ease</h2>
+                <p>Access previous exam papers to prepare better and ace your studies.</p>
+                <a href="#" class="cta-btn">Get Started</a>
             </div>
-        </header>
-
-        <div class="main-dashboard">
-            <!-- PDF Upload Section -->
-            <section class="pdf-upload">
-                <h2>Upload PDF Files</h2>
-                <form action="upload.php" method="POST" enctype="multipart/form-data">
-                    <label for="pdfFile">Select PDF:</label>
-                    <input type="file" name="pdfFile" id="pdfFile" accept=".pdf" required>
-                    <button type="submit" name="upload">Upload</button>
-                </form>
-            </section>
-
-            <!-- Uploaded Files List -->
-            <section class="pdf-list">
-                <h2>Uploaded PDF Files</h2>
-                <ul>
-                    <?php
-                        include 'connection.php';
-                        $query = "SELECT * FROM uploaded_pdfs";
-                        $result = mysqli_query($conn, $query);
-                        while ($row = mysqli_fetch_assoc($result)) {
-                            echo '<li><a href="uploads/' . $row['file_name'] . '" target="_blank">' . $row['file_name'] . '</a></li>';
-                        }
-                    ?>
-                </ul>
-            </section>
         </div>
-    </div>
+    </section>
+
+
+    <section class="mission-vision">
+        <div class="mission">
+            <h2>Our Mission</h2>
+            <p>To provide students with easy access to past exam papers, helping them prepare effectively.</p>
+        </div>
+        <div class="vision">
+            <h2>Our Vision</h2>
+            <p>To be the top digital platform for academic past papers, empowering students worldwide.</p>
+        </div>
+    </section>
+
+    <section class="search-section">
+        <h2>Search for Past Papers</h2>
+        <input type="text" placeholder="Enter subject or exam name...">
+        <button>Search</button>
+    </section>
+
+    <section class="categories">
+        <h2>Explore Subjects</h2>
+        <div class="category-list">
+            <div class="category">Mathematics</div>
+            <div class="category">Physics</div>
+            <div class="category">Chemistry</div>
+            <div class="category">Biology</div>
+            <div class="category">History</div>
+            <div class="category">English</div>
+        </div>
+    </section>
+
+    <section class="about">
+        <h2>About Us</h2>
+        <p>Past Paper Finder helps students access past exams easily, making learning more effective.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Past Paper Finder | All rights reserved.</p>
+    </footer>
 </body>
 </html>
