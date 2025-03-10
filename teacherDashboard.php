@@ -243,7 +243,7 @@ $mostViewed = mysqli_fetch_assoc($mostViewedResult);
                 <input type="text" id="otherCategory" name="otherCategory" placeholder="Enter category">
             </div>
 
-            <label for="fileimage">Upload cover page:</label>
+            <label for="fileimage">Upload cover pages:</label>
             <input type="file" id="fileimage" name="fileimage">
 
             <label for="allnames">Uploaded by:</label>
