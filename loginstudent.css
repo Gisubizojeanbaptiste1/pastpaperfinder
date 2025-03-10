@@ -105,6 +105,11 @@ input:valid~label {
   margin: 25px 0 10px;
 }
 
+.forget {
+  color: #f49c46;
+  text-align: center;
+}
+
 .forgeta p a {
   text-decoration: none;
   color: #f49c46;

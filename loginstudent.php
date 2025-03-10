@@ -45,8 +45,8 @@ if(isset($_GET['error'])){
             <label for="remember"><input type="checkbox" id="remember" onclick="myJayFunction()">Show password</label>
             <a href="forgetpassword.php" class="forgeta">Forgot password</a>
           </div>
-          <button type="submit" class="btn-login" name="studentlogin">Log in</button>
-
+          <button type="submit" class="btn-login" name="studentlogin">Log in</button> <br>
+          <a href="index.php" class="forget">Go To Home</a>
         </form>
       </div>
     </div>
