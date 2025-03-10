@@ -15,10 +15,10 @@
     <aside class="sidebar">
       <h2>Past Paper Finder</h2>
       <nav>
-        <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="teacherDashboard.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
         <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
-        <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
+        <a href="analyticspageteacher.php"class="active"><i class="fa fa-chart-line"></i> Analytics</a>
         <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
         <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
         <a href="teacherlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
@@ -32,7 +32,7 @@
       <canvas class="chart-container" id="pie_chart"></canvas>
       <canvas class="chart-container" id="line_chart"></canvas>
       <canvas class="chart-container" id="area_chart"></canvas>
-      <canvas class="chart-container" id="scatter_chart"></canvas>
+     
     </section>
   </main>
 

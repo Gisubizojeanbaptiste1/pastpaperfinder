@@ -15,6 +15,15 @@ if (!isset($_SESSION['id'])) {
     header('location:loginteacher.php');
     exit();
 }
+
+$mostSearchedQuery = "SELECT subject, searches_count FROM past_papers ORDER BY searches_count DESC LIMIT 1";
+$mostViewedQuery = "SELECT subject, views_count FROM past_papers ORDER BY views_count DESC LIMIT 1";
+
+$mostSearchedResult = mysqli_query($conn, $mostSearchedQuery);
+$mostViewedResult = mysqli_query($conn, $mostViewedQuery);
+
+$mostSearched = mysqli_fetch_assoc($mostSearchedResult);
+$mostViewed = mysqli_fetch_assoc($mostViewedResult);
 ?>
 
 
@@ -55,13 +64,13 @@ if (!isset($_SESSION['id'])) {
         <h2>Analytics</h2>
         <div class="stats">
           <div class="stat-card">
-            <h3>Most Searched Subjects</h3>
-            <p>Mathematics</p>
-            <p>On January,08 , 2025</p>
+            <h3>Most Searched Subject</h3>
+            <p><?php echo $mostSearched['subject']; ?></p>
+            <p>On <?php echo date('F j, Y'); ?></p>
           </div>
           <div class="stat-card">
-            <h3>Most Viewed subject</h3>
-            <p>Total viewed subject</p>
+            <h3>Most Viewed Subject</h3>
+            <p><?php echo $mostViewed['subject']; ?></p>
             <p>Today</p>
           </div>
         </div>
@@ -73,7 +82,8 @@ if (!isset($_SESSION['id'])) {
 
         <!-- Filter Inputs -->
         <input type="text" id="searchInput" placeholder="Type here to search instantly" onkeyup="searchTable()" 
-          style="width:19rem;height:2rem;padding-left:1rem;" class="search-input"> <br>
+          style="width:19rem;height:2rem;padding-left:1rem;" class="search-input">
+           <br>
 
         <label for="">Filter Content Based On: </label>
         <select name="subject" id="subjectFilter" class="select_option">
@@ -122,59 +132,57 @@ if (!isset($_SESSION['id'])) {
       </section>
               <!-- Manage Past Papers -->
   <section id="manage" class="manage">
-      <table id="papersTable">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Term</th>
-            <th>Week</th>
-            <th>Subject</th>
-            <th>Class</th>
-            <th>Year</th>
-            <th>Category</th>
-            <th>Teacher Name</th>
-            <th>Qns</th>
-            <th>Ans</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <?php
-          include 'connection.php';
-          $sql = "SELECT * FROM past_papers";
-          $result = mysqli_query($conn, $sql);
+  <table id="papersTable">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Term</th>
+      <th>Week</th>
+      <th>Subject</th>
+      <th>Class</th>
+      <th>Year</th>
+      <th>Category</th>
+      <th>Teacher Name</th>
+      <th>Qns</th>
+      <th>Ans</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    include 'connection.php';
+    $sql = "SELECT * FROM past_papers";
+    $result = mysqli_query($conn, $sql);
 
-          if (mysqli_num_rows($result) > 0) {
-              while ($row = mysqli_fetch_assoc($result)) {
-                  $coverPath = str_replace('C:/xampp/htdocs', '', $row['cover_page']);
-                  $filePath = str_replace('C:/xampp/htdocs', '', $row['file_path']);
-                  $answerPath = str_replace('C:/xampp/htdocs', '', $row['answers']);
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $coverPath = str_replace('C:/xampp/htdocs', '', $row['cover_page']);
+            $filePath = str_replace('C:/xampp/htdocs', '', $row['file_path']);
+            $answerPath = str_replace('C:/xampp/htdocs', '', $row['answers']);
 
-                  echo "<tr>
-                          <td>{$row['id']}</td>
-                          <td>{$row['Term']}</td>
-                          <td>{$row['weeks']}</td>
-                          <td>{$row['subject']}</td>
-                          <td>{$row['class_selection']}</td>
-                          <td>{$row['year']}</td>
-                          <td>{$row['category']}</td>
-                          
-                          <td>{$row['uploaded_by']}</td>
-                          <td><a href='{$filePath}' target='_blank'>Qns</a></td>
-                          <td><a href='{$answerPath}' target='_blank'>Ans</a></td>
-                          
-                          <td>
-                              <a href='#' class='edit-btn' data-id='{$row['id']}' data-subject='{$row['subject']}' data-class='{$row['class_selection']}' data-year='{$row['year']}' data-category='{$row['category']}' data-uploaded_by='{$row['uploaded_by']}' data-cover_path='{$coverPath}' data-file_path='{$filePath}'>Edit</a> |
-                              <a href='delete_paper.php?id={$row['id']}' onclick='return confirm(\"Are you sure?\")'>Delete</a>
-                          </td>
-                        </tr>";
-              }
-          } else {
-              echo "<tr><td colspan='13'>No past papers found.</td></tr>";
-          }
-          ?>
-        </tbody>
-      </table>
+            echo "<tr>
+                    <td>{$row['id']}</td>
+                    <td>{$row['Term']}</td>
+                    <td>{$row['weeks']}</td>
+                    <td>{$row['subject']}</td>
+                    <td>{$row['class_selection']}</td>
+                    <td>{$row['year']}</td>
+                    <td>{$row['category']}</td>
+                    <td>{$row['uploaded_by']}</td>
+                    <td><a href='{$filePath}' target='_blank' onclick='updateViewCount({$row['id']})'>Qns</a></td>
+                    <td><a href='{$answerPath}' target='_blank' onclick='updateViewCount({$row['id']})'>Ans</a></td>
+                    <td>
+                        <a href='#' class='edit-btn' data-id='{$row['id']}'>Edit</a> |
+                        <a href='delete_paper.php?id={$row['id']}' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                    </td>
+                  </tr>";
+        }
+    } else {
+        echo "<tr><td colspan='13'>No past papers found.</td></tr>";
+    }
+    ?>
+  </tbody>
+</table>
   </section>
 
     </main>
@@ -251,32 +259,88 @@ if (!isset($_SESSION['id'])) {
   </div>
 
   <script>
+// function searchTable() {
+//   var input, filter, table, tr, td, i, j, txtValue;
+//   input = document.getElementById("searchInput");
+//   filter = input.value.toUpperCase(); 
+//   table = document.getElementById("papersTable");
+//   tr = table.getElementsByTagName("tr"); 
+
+ 
+//   for (i = 1; i < tr.length; i++) {
+//     tr[i].style.display = "none"; 
+//     td = tr[i].getElementsByTagName("td");
+    
+    
+//     for (j = 0; j < td.length; j++) {
+//       if (td[j]) {
+//         txtValue = td[j].textContent || td[j].innerText;
+        
+        
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//           tr[i].style.display = "";
+//           break;
+//         }
+//       }
+//     }
+//   }
+// }
+// Search Table Function
 function searchTable() {
   var input, filter, table, tr, td, i, j, txtValue;
   input = document.getElementById("searchInput");
-  filter = input.value.toUpperCase(); // Convert input to uppercase for case-insensitive search
+  filter = input.value.toUpperCase();
   table = document.getElementById("papersTable");
-  tr = table.getElementsByTagName("tr"); // Get all rows in the table
+  tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows (except the header row)
   for (i = 1; i < tr.length; i++) {
     tr[i].style.display = "none"; // Initially hide the row
     td = tr[i].getElementsByTagName("td");
-    
-    // Loop through all columns of the current row
+
     for (j = 0; j < td.length; j++) {
       if (td[j]) {
         txtValue = td[j].textContent || td[j].innerText;
-        
-        // If the text in any column matches the search input, show the row
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
           tr[i].style.display = "";
-          break; // No need to check further columns if match found
+          
+          // Send the search count update when a paper is matched
+          var paperId = tr[i].getElementsByTagName("td")[0].textContent; // ID is in the first column
+          updateSearchCount(paperId);
+
+          break;
         }
       }
     }
   }
 }
+
+// Update Search Count via AJAX
+function updateSearchCount(paperId) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "update_search.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log('Search count updated!');
+    }
+  };
+  xhr.send("id=" + paperId);
+}
+
+// Update View Count via AJAX
+function updateViewCount(paperId) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "update_view.php", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log('View count updated!');
+    }
+  };
+  xhr.send("id=" + paperId);
+}
+
 </script>
 <script>
 document.getElementById('subjectFilter').addEventListener('change', applyFilters);

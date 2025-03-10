@@ -125,7 +125,9 @@ h2 {
 .manage table td {
   background-color: #f8f9fa;
 }
-
+.manage h2{
+  color: #2980b9;
+}
 .analytics .stats {
   display: flex;
   width: 90%;

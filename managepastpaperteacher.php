@@ -23,7 +23,7 @@ if (!isset($_SESSION['id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Dashboard | Past Paper Finder</title>
-  <link rel="stylesheet" href="teacherDashboard.css">
+  <link rel="stylesheet" href="mangepastpaperteacher.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -32,9 +32,9 @@ if (!isset($_SESSION['id'])) {
     <aside class="sidebar">
       <h2>Past Paper Finder</h2>
       <nav>
-        <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="teacherDashboard.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
-        <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
+        <a href="managepastpaperteacher.php" class="active"><i class="fa fa-folder"></i> Manage Papers</a>
         <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
         <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
         <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
@@ -44,12 +44,6 @@ if (!isset($_SESSION['id'])) {
 
     <!-- Main Content -->
     <main>
-      <!-- Welcome Section -->
-      <section class="welcome">
-        <h1>Welcome, <span>Teacher</span></h1>
-        <p>Manage your past papers and interact with students.</p>
-      </section>
-
       <!-- Manage Past Papers -->
       <section id="manage" class="manage">
         <h2>Manage Past Papers</h2>

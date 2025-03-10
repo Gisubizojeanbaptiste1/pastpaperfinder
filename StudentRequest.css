@@ -60,64 +60,74 @@ main h2 {
 section {
   margin-bottom: 30px;
 }
-.request {
+#requests {
+  width: 100%;
   overflow-x: auto;
-  margin-top: 20px;
 }
 
-/* Table styling */
-.request table {
+#papersTable {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
+  margin: 20px 0;
 }
 
-/* Header styling */
-.request table th {
-  padding: 12px 15px;
-  text-align: left;
+/* Table Header */
+#papersTable thead {
   background-color: #2c3e50;
-  color: #ecf0f1;
-  position: sticky; 
-  top: 0;
-  z-index: 10;
+  color: #fff;
+  text-align: left;
 }
 
-/* Cell styling */
-.request table td {
+#papersTable th {
+  padding: 12px 15px;
+  font-size: 14px;
+}
+
+/* Table Body */
+#papersTable tbody {
+  background-color: #fff;
+}
+
+#papersTable td {
   padding: 10px 15px;
-  background-color: #f8f9fa;
-  white-space: nowrap;
+  font-size: 13px;
+  border-bottom: 1px solid #ddd;
 }
 
-/* Zebra striping for rows */
-.request table tr:nth-child(even) {
-  background-color: #f2f2f2;
+/* Hover Effect on Rows */
+#papersTable tbody tr:hover {
+  background-color: #f1f1f1;
 }
 
-/* Hover effect */
-.request table tr:hover {
-  background-color: #dfe6e9;
-}
-
-/* Action link styling */
-.request a {
-  text-decoration: none;
-  color: #3498db;
-  font-weight: bold;
-}
-
-.request a:hover {
-  color: #1abc9c;
-}
-
-/* Status styling */
+/* Status Column Styling */
 .status-solved {
-  color: #27ae60; 
+  color: green;
   font-weight: bold;
 }
 
 .status-pending {
-  color: #e74c3c;
+  color: red;
   font-weight: bold;
+}
+
+/* Action Links */
+#papersTable a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  padding: 5px 10px;
+  border: 1px solid #2c3e50;
+  border-radius: 5px;
+}
+
+#papersTable a:hover {
+  background-color: #2c3e50;
+  color: #fff;
+}
+
+/* No Data Message */
+#papersTable tr td[colspan="12"] {
+  text-align: center;
+  font-style: italic;
+  color: #888;
 }

@@ -40,12 +40,12 @@ if (isset($_GET['error'])) {
     <aside class="sidebar">
       <h2>Past Paper Finder</h2>
       <nav>
-        <a href="teacherDashboard.php" class="active"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
+        <a href="teacherDashboard.php"><i class="fa fa-tachometer-alt"></i> Dashboard</a>
         <a href="uploadsteacher.php"><i class="fa fa-upload"></i> Upload Past Papers</a>
         <a href="managepastpaperteacher.php"><i class="fa fa-folder"></i> Manage Papers</a>
         <a href="analyticspageteacher.php"><i class="fa fa-chart-line"></i> Analytics</a>
         <!-- <a href="communicate.php"><i class="fa fa-comments"></i> Communicate</a> -->
-        <a href="StudentRequest.php"><i class="fa fa-comments"></i> Student Requests</a>
+        <a href="StudentRequest.php"  class="active"><i class="fa fa-comments"></i> Student Requests</a>
         <a href="teacherlogout.php"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </nav>
     </aside>
@@ -53,6 +53,7 @@ if (isset($_GET['error'])) {
     <!-- Main Content -->
     <main>
       <!-- Upload Past Papers -->
+       <h2 style="font-size:1.2rem;">Student's Request for past papers</h2>
       <section id="requests" class="request">
     <table id="papersTable">
         <thead>
@@ -113,7 +114,7 @@ if (isset($_GET['error'])) {
                             <td>";
 
                     if ($row['solved'] == 'No') {
-                        echo "<a href='mark_solved.php?id={$row['id']}'>Mark as Solved</a>";
+                        echo "<a href='mark_solved.php?id={$row['id']}'>Solved</a>";
                     } else {
                         echo "Already Solved";
                     }
