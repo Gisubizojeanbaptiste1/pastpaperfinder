@@ -133,7 +133,7 @@ if (!isset($_SESSION['id'])) {
     <input type="file" id="file" name="file" accept=".pdf,.doc,.docx" required>
     <label for="answers">Upload answer of paper:</label>
     <input type="file" id="answers" name="answers" accept=".pdf,.doc,.docx" required>
-    <button type="submit" name="upload">Upload</button>
+    <button type="submit" name="uploadpastpaper">Upload</button>
 </form>
 
       </section>
