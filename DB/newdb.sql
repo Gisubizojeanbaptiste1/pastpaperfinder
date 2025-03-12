@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2025 at 06:21 PM
+-- Generation Time: Mar 12, 2025 at 08:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -75,7 +75,8 @@ INSERT INTO `favourite` (`id`, `user_id`, `paper_id`, `added_at`) VALUES
 (6, 3, 3, '2025-02-13 12:05:51'),
 (7, 3, 3, '2025-02-13 12:05:55'),
 (8, 2, 2, '2025-02-13 12:10:18'),
-(9, 2, 4, '2025-02-13 12:15:26');
+(9, 2, 4, '2025-02-13 12:15:26'),
+(10, 2, 3, '2025-02-27 12:44:40');
 
 -- --------------------------------------------------------
 
@@ -95,18 +96,21 @@ CREATE TABLE `past_papers` (
   `uploaded_by` varchar(255) NOT NULL,
   `file_path` varchar(255) NOT NULL,
   `answers` varchar(255) DEFAULT NULL,
-  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `uploaded_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `searches_count` int(11) DEFAULT 0,
+  `views_count` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `past_papers`
 --
 
-INSERT INTO `past_papers` (`id`, `Term`, `weeks`, `subject`, `class_selection`, `year`, `category`, `cover_page`, `uploaded_by`, `file_path`, `answers`, `uploaded_at`) VALUES
-(1, 'Term 2', 'Week 5', 'Computer science', 'S6MCE', '2025-02-01', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738415743_1737213767_download.jpeg', 'Seraphin Mukiza', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738415743_1737213767_2011 Computer Science Past Paper.pdf', NULL, '2025-02-01 13:15:43'),
-(2, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738934605_1737213781_download.jpeg', 'Nagakuze samuel', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738934605_1737213781_2012 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738934605_1737213781_2012 Computer Science Past Paper.pdf', '2025-02-07 13:23:25'),
-(3, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738934676_1737213781_download.jpeg', 'Nagakuze samuel', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738934676_1737213781_2012 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738934676_1737213781_2012 Computer Science Past Paper.pdf', '2025-02-07 13:24:36'),
-(4, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738935801_1737213811_download.jpeg', 'Seraphin Mukiza', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738935801_1737213788_2013 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738935801_1737213788_2013 Computer Science Past Paper.pdf', '2025-02-07 13:43:21');
+INSERT INTO `past_papers` (`id`, `Term`, `weeks`, `subject`, `class_selection`, `year`, `category`, `cover_page`, `uploaded_by`, `file_path`, `answers`, `uploaded_at`, `searches_count`, `views_count`) VALUES
+(1, 'Term 2', 'Week 5', 'Computer science', 'S6MCE', '2025-02-01', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738415743_1737213767_download.jpeg', 'Seraphin Mukiza', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738415743_1737213767_2011 Computer Science Past Paper.pdf', NULL, '2025-02-01 13:15:43', 29, 8),
+(2, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738934605_1737213781_download.jpeg', 'Nagakuze samuel', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738934605_1737213781_2012 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738934605_1737213781_2012 Computer Science Past Paper.pdf', '2025-02-07 13:23:25', 30, 2),
+(3, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738934676_1737213781_download.jpeg', 'Nagakuze samuel', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738934676_1737213781_2012 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738934676_1737213781_2012 Computer Science Past Paper.pdf', '2025-02-07 13:24:36', 30, 2),
+(4, 'Term 2', 'Week 5', 'Computer science', 'S6 All', '2025-02-07', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaper/uploads/covers/1738935801_1737213811_download.jpeg', 'Seraphin Mukiza', 'C:/xampp/htdocs/steam/pastpaper/uploads/papers/1738935801_1737213788_2013 Computer Science Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaper/uploads/answers/1738935801_1737213788_2013 Computer Science Past Paper.pdf', '2025-02-07 13:43:21', 29, 2),
+(5, 'Term 2', 'Week 8', 'Biology', 'S6PCB', '0000-00-00', 'Nationalexam', 'C:/xampp/htdocs/steam/pastpaperfinder/uploads/covers/1741714099_1737213804_download.jpeg', 'MBONARUZA Jean Jule', 'C:/xampp/htdocs/steam/pastpaperfinder/uploads/papers/1741714099_2004 Biology II Past Paper.pdf', 'C:/xampp/htdocs/steam/pastpaperfinder/uploads/answers/1741714099_2004 Biology II Past Paper.pdf', '2025-03-11 17:28:19', 18, 1);
 
 -- --------------------------------------------------------
 
@@ -124,16 +128,17 @@ CREATE TABLE `requests` (
   `otherCategory` varchar(255) DEFAULT NULL,
   `class_id` int(11) NOT NULL,
   `details` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `solved` enum('No','Yes') DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `requests`
 --
 
-INSERT INTO `requests` (`id`, `subject`, `otherSubject`, `grade`, `date`, `category`, `otherCategory`, `class_id`, `details`, `created_at`) VALUES
-(1, 'Chemistry', NULL, 'Ishami', '2025-02-01', 'Exam', NULL, 7, 'Missing paper request', '2025-02-02 11:37:41'),
-(2, 'kinyearwanda', '', 'Ishami', '2025-02-02', 'weeklyexam', '', 7, 'Can you upload weekly exam of s5 kinyarwanda.', '2025-02-02 11:39:26');
+INSERT INTO `requests` (`id`, `subject`, `otherSubject`, `grade`, `date`, `category`, `otherCategory`, `class_id`, `details`, `created_at`, `solved`) VALUES
+(1, 'Chemistry', NULL, 'Ishami', '2025-02-01', 'Exam', NULL, 7, 'Missing paper request', '2025-02-02 11:37:41', 'Yes'),
+(2, 'kinyarwanda', '', 'Ishami', '2025-02-02', 'weeklyexam', '', 7, 'Can you upload weekly exam of s5 kinyarwanda.', '2025-02-02 11:39:26', 'No');
 
 -- --------------------------------------------------------
 
@@ -157,7 +162,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `userrole`, `class_id`) VALUES
 (1, 'Jay B', 'admin@asyv', 'user', 'admin', NULL),
 (2, 'Agahozo', 'student@asyv.org', 'heyman', 'student', 2),
-(3, 'Mukiza Seraphin', 'teachers@asyv.org', 'teachers', 'teacher', NULL);
+(3, 'Mukiza Seraphin', 'teachers@asyv.org', 'teachers', 'teacher', NULL),
+(4, 'Emmanuel Semaza', 'emmy@gmail.com', 'emmanuel', 'student', NULL);
 
 --
 -- Indexes for dumped tables
@@ -212,13 +218,13 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `favourite`
 --
 ALTER TABLE `favourite`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `past_papers`
 --
 ALTER TABLE `past_papers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `requests`
@@ -230,7 +236,7 @@ ALTER TABLE `requests`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
