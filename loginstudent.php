@@ -46,6 +46,7 @@ if(isset($_GET['error'])){
             <a href="forgetpassword.php" class="forgeta">Forgot password</a>
           </div>
           <button type="submit" class="btn-login" name="studentlogin">Log in</button> <br>
+          <p class='forget'>Do not have account? <a href="studentSignup.php" class="forget">Sign up</a></p>
           <a href="index.php" class="forget">Go To Home</a>
         </form>
       </div>

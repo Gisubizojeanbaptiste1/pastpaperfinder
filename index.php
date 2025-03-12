@@ -83,6 +83,7 @@
 
     <footer>
         <p>&copy; 2025 Past Paper Finder | All rights reserved.</p>
+        <p>Developed with ❤️ by: <strong>NextGen Coders</strong></p>
     </footer>
 </body>
 </html>

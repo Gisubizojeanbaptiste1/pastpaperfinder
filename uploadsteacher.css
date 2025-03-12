@@ -67,7 +67,6 @@ section {
     /* max-width: 500px; */
 }
 .upload form{
-  
   display: flex;
   flex-direction: column;
   justify-content: center;

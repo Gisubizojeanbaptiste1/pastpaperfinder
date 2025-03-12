@@ -19,7 +19,8 @@ section {
 .form-box {
   position: relative;
   width: 450px;
-  height: 440px;
+  height: max-content;
+  padding: 1rem 0;
   background: transparent;
   border: 2px solid #f49c46;
   border-radius: 25px;
@@ -107,7 +108,7 @@ input:valid~label {
 
 .forget {
   color: #f49c46;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .forgeta p a {
@@ -150,4 +151,12 @@ input:valid~label {
 .g-signin2 {
   margin-top: 15px;
   text-align: center;
+}
+
+.role {
+  background: transparent;
+  color: white;
+  font-size: 0.9em;
+  width: 100%;
+  border: none;
 }

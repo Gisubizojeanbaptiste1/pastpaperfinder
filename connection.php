@@ -31,6 +31,23 @@ if (session_status() === PHP_SESSION_NONE) {
                 exit; 
             }
         }
+    
+        //student sign up
+        if (isset($_POST['studentsignin'])) {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $userrole = 'student';
+    
+            $query = "INSERT INTO users (name, email, password, userrole) VALUES ('$name', '$email', '$password', '$userrole')";
+    
+            if (mysqli_query($conn, $query)) {
+                header('Location: loginstudent.php');
+                exit();
+            } else {
+                echo "Error: " . mysqli_error($conn);
+            }
+        }
             
     $search = '';
 
@@ -184,7 +201,7 @@ if (session_status() === PHP_SESSION_NONE) {
     //     }
     // }
     
-    if (isset($_POST['update'])) {
+    if (isset($_POST['updatePastpaper'])) {
         // Get form data with proper error handling for missing values
         $subject = mysqli_real_escape_string($conn, $_POST['subject']);
         $class_selection = mysqli_real_escape_string($conn, $_POST['classselection']);
@@ -270,39 +287,39 @@ if (session_status() === PHP_SESSION_NONE) {
 
 
     //Uploading pastpapers by teachers
-    if (isset($_POST['uploadpastpaper'])) {
+    // if (isset($_POST['uploadpastpaper'])) {
         
-        $term = mysqli_real_escape_string($conn, $_POST['academicyearterms']);
-        $week = mysqli_real_escape_string($conn, $_POST['Academicweeks']);
-        $subject = mysqli_real_escape_string($conn, $_POST['subject']);
-        $class_selection = mysqli_real_escape_string($conn, $_POST['classselection']);
-        $category = mysqli_real_escape_string($conn, $_POST['optionsofcategory']);
-        $uploaded_by = mysqli_real_escape_string($conn, $_POST['allnames']);
-        $year = date("Y-m-d"); 
+    //     $term = mysqli_real_escape_string($conn, $_POST['academicyearterms']);
+    //     $week = mysqli_real_escape_string($conn, $_POST['Academicweeks']);
+    //     $subject = mysqli_real_escape_string($conn, $_POST['subject']);
+    //     $class_selection = mysqli_real_escape_string($conn, $_POST['classselection']);
+    //     $category = mysqli_real_escape_string($conn, $_POST['optionsofcategory']);
+    //     $uploaded_by = mysqli_real_escape_string($conn, $_POST['allnames']);
+    //     $year = date("Y-m-d"); 
     
-        // Handle file uploads
-        $cover_page = $_FILES['fileimage']['name'];
-        $file_path = $_FILES['file']['name'];
-        $answers = $_FILES['answers']['name'];
+    //     // Handle file uploads
+    //     $cover_page = $_FILES['fileimage']['name'];
+    //     $file_path = $_FILES['file']['name'];
+    //     $answers = $_FILES['answers']['name'];
     
-        // File upload directory
-        $target_dir = "uploads/";
-        move_uploaded_file($_FILES['fileimage']['tmp_name'], $target_dir . $cover_page);
-        move_uploaded_file($_FILES['file']['tmp_name'], $target_dir . $file_path);
-        move_uploaded_file($_FILES['answers']['tmp_name'], $target_dir . $answers);
+    //     // File upload directory
+    //     $target_dir = "uploads/";
+    //     move_uploaded_file($_FILES['fileimage']['tmp_name'], $target_dir . $cover_page);
+    //     move_uploaded_file($_FILES['file']['tmp_name'], $target_dir . $file_path);
+    //     move_uploaded_file($_FILES['answers']['tmp_name'], $target_dir . $answers);
     
-        // Insert into database
-        $query = "INSERT INTO past_papers (Term, weeks, subject, class_selection, year, category, cover_page, uploaded_by, file_path, answers) 
-                  VALUES ('$term', '$week', '$subject', '$class_selection', '$year', '$category', '$cover_page', '$uploaded_by', '$file_path', '$answers')";
+    //     // Insert into database
+    //     $query = "INSERT INTO past_papers (Term, weeks, subject, class_selection, year, category, cover_page, uploaded_by, file_path, answers) 
+    //               VALUES ('$term', '$week', '$subject', '$class_selection', '$year', '$category', '$cover_page', '$uploaded_by', '$file_path', '$answers')";
     
-        if (mysqli_query($conn, $query)) {
-            header('Location: teacherDashboard.php');
-            Alert("The past paper have been inserted successfully");
-            exit();
-        } else {
-            echo "Error: " . mysqli_error($conn);
-        }
-    }
+    //     if (mysqli_query($conn, $query)) {
+    //         header('Location: teacherDashboard.php');
+    //         Alert("The past paper have been inserted successfully");
+    //         exit();
+    //     } else {
+    //         echo "Error: " . mysqli_error($conn);
+    //     }
+    // }
 
     // if (isset($_POST['uploadpastpaper'])) {
     //     $term = $_POST['academicyearterms'];
@@ -350,5 +367,80 @@ if (session_status() === PHP_SESSION_NONE) {
     //     $conn->close();
     // }
 
+    if (isset($_POST['uploadpastpaper'])) {
+        // Get form data with proper error handling for missing values
+        $subject = mysqli_real_escape_string($conn, $_POST['subject']);
+        $class_selection = mysqli_real_escape_string($conn, $_POST['classselection']);
+        $term = isset($_POST['academicyearterms']) ? mysqli_real_escape_string($conn, $_POST['academicyearterms']) : '';
+        $week = mysqli_real_escape_string($conn, $_POST['Academicweeks']);
+        $category = isset($_POST['optionsofcategory']) ? mysqli_real_escape_string($conn, $_POST['optionsofcategory']) : '';
+        $uploaded_by = mysqli_real_escape_string($conn, $_POST['allnames']);
+    
+        // Handling 'Other' options
+        if ($class_selection === "other") {
+            $class_selection = mysqli_real_escape_string($conn, $_POST['otherClass']);
+        }
+    
+        if ($category === "other") {
+            $category = mysqli_real_escape_string($conn, $_POST['otherCategory']);
+        }
+    
+        // Handle file uploads
+        $cover_page = $_FILES['fileimage'];
+        $paper_file = $_FILES['file'];
+        $answer_file = $_FILES['answers'];
+    
+        // Check for upload errors
+        if ($cover_page['error'] !== UPLOAD_ERR_OK) {
+            die("Error uploading the cover page. Error code: " . $cover_page['error']);
+        }
+    
+        if ($paper_file['error'] !== UPLOAD_ERR_OK) {
+            die("Error uploading the paper file. Error code: " . $paper_file['error']);
+        }
+    
+        if ($answer_file['error'] !== UPLOAD_ERR_OK) {
+            die("Error uploading the answer file. Error code: " . $answer_file['error']);
+        }
+    
+        // Directories for file storage
+        $cover_upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/steam/pastpaperfinder/uploads/covers/';
+        $paper_upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/steam/pastpaperfinder/uploads/papers/';
+        $answer_upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/steam/pastpaperfinder/uploads/answers/';
+    
+        // Validate and move the files
+        $cover_page_name = time() . '_' . basename($cover_page['name']);
+        $cover_page_path = $cover_upload_dir . $cover_page_name;
+        if (!move_uploaded_file($cover_page['tmp_name'], $cover_page_path)) {
+            die("Error uploading the cover page.");
+        }
+    
+        $paper_name = time() . '_' . basename($paper_file['name']);
+        $paper_path = $paper_upload_dir . $paper_name;
+        if (!move_uploaded_file($paper_file['tmp_name'], $paper_path)) {
+            die("Error uploading the paper file.");
+        }
+    
+        $answer_name = time() . '_' . basename($answer_file['name']);
+        $answer_path = $answer_upload_dir . $answer_name;
+        if (!move_uploaded_file($answer_file['tmp_name'], $answer_path)) {
+            die("Error uploading the answer file.");
+        }
+    
+        // Insert data into the database
+        $sql = "INSERT INTO past_papers 
+            (Term, weeks, subject, class_selection, category, cover_page, uploaded_by, file_path, answers) 
+            VALUES 
+            ('$term', '$week', '$subject', '$class_selection', '$category', '$cover_page_path', '$uploaded_by', '$paper_path', '$answer_path')";
+    
+        if (mysqli_query($conn, $sql)) {
+            echo "Past paper uploaded successfully!";
+            header("Location: managepastpaperteacher.php");
+            exit();
+        } else {
+            echo "Error: " . mysqli_error($conn);
+        }
+    }
+    
 ?>
 
